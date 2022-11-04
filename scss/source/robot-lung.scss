@@ -1,0 +1,100 @@
+/**
+
+  [ robot-lung ]
+
+  A hot pink theme for Reveal.js with Roboto fonts and a colorful border.
+  By Josh Dzielak, https://dzello.com/, License MIT
+
+  Or if you don't want to rebuild the theme just override the .line background
+  property with some CSS:
+
+  .reveal {
+    border-color: <new-color>;
+  }
+
+*/
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:300,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+
+// store hot pink in a variable
+$hotPink: #FF4081;
+
+// the color of the thick border surrounding the presention
+$borderColor: $hotPink;
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: #363636;
+$headingColor: #141414;
+
+$mainFontSize: 32px;
+$mainFont: 'Roboto Slab', serif;
+$headingFont: 'Roboto', sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 700;
+$linkColor: $hotPink;
+$linkColorHover: lighten($linkColor, 15%);
+$selectionBackgroundColor: lighten($linkColor, 25%);
+
+$heading1Size: 2.6em;
+$heading2Size: 2.2em;
+$heading3Size: 1.7em;
+$heading4Size: 1.4em;
+
+$progressColor: #FF80A1;
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+// Change text colors against light slide backgrounds
+@include light-bg-text-color(#141414);
+
+
+/*********************************************
+ * BORDER
+ *********************************************/
+
+.reveal {
+  box-sizing: border-box;
+  border: 30px solid $borderColor;
+
+  @media (max-width: 840px) {
+    border-width: 15px;
+  }
+}
+
+// Don't show the colored frame against dark backgrounds and on slides without border
+body.reveal-no-slide-border .reveal,
+.reveal.has-dark-background {
+  border: none;
+
+  .controls {
+    right: 42px;
+    bottom: 42px;
+
+    @media (max-width: 840px) {
+      right: 27px;
+      bottom: 27px;
+    }
+  }
+}
+
+.reveal .progress {
+  z-index: 1000;
+}

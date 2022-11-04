@@ -1,0 +1,12 @@
+@import "./exposer";
+
+@import "../../node_modules/reveal.js/css/theme/template/theme";
+
+
+/*********************************************
+ * PROGRESS BAR (override)
+ *********************************************/
+
+.reveal .progress {
+	color: var(--r-progress-color);
+}

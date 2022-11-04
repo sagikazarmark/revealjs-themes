@@ -1,0 +1,58 @@
+version: '3'
+
+vars:
+  DIST_DIR: dist
+
+tasks:
+  dist-dir:
+    internal: true
+    cmds:
+      - cmd: mkdir -p {{.DIST_DIR}}
+        silent: true
+
+  deps:
+    run: once
+    cmds:
+      - npm install
+    sources:
+      - package.json
+      - package-lock.json
+    generates:
+      - node_modules/**
+
+  build:
+    deps: [dist-dir, deps]
+    cmds:
+      - sass --style expanded --sourcemap=none scss/source/robot-lung.scss {{.DIST_DIR}}/robot-lung.css
+      - sass --style compressed --sourcemap=none scss/source/robot-lung.scss {{.DIST_DIR}}/robot-lung.min.css
+    sources:
+      - scss/**/*.scss
+      - node_modules/reveal.js/css/theme/template/*.scss
+    generates:
+      - "{{.DIST_DIR}}/*.css"
+
+  test:
+    cmds:
+      - scss -c scss/source/*.scss
+
+  demo:
+    deps: [deps, build]
+    cmds:
+      - rm -rf demo
+      - mkdir demo
+      - cp -r node_modules/reveal.js/dist/ demo/
+      - cp -r node_modules/reveal.js/plugin/ demo/
+      - cp -r dist/* demo/dist/theme/
+      - cp demo.html demo/index.html
+    sources:
+      - node_modules/reveal.js/dist/**
+      - node_modules/reveal.js/plugin/**
+      - dist/**
+      - demo.html
+    generates:
+      - demo/**
+
+  serve:
+    deps: [demo]
+    cmds:
+      - caddy file-server --root demo/

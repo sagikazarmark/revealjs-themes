@@ -1,0 +1,22 @@
+{
+  "name": "revealjs-themes",
+  "version": "0.1.0",
+  "description": "RevealJS themes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagikazarmark/revealjs-themes.git"
+  },
+  "author": {
+    "name": "Márk Sági-Kazár",
+    "email": "mark.sagikazar@gmail.com",
+    "web": "https://sagikazarmark.hu"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sagikazarmark/revealjs-themes/issues"
+  },
+  "homepage": "https://github.com/sagikazarmark/revealjs-themes",
+  "dependencies": {
+    "reveal.js": "^4.4.0"
+  }
+}

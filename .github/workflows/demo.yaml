@@ -41,7 +41,7 @@ jobs:
         run: task demo
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./demo/
 
